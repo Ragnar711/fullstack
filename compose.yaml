@@ -1,6 +1,18 @@
 version: "3.8"
 
 services:
+    server:
+        container_name: server
+        image: server
+        build:
+            context: ./server
+            dockerfile: server.dockerfile
+        ports:
+            - 4000:4000
+        environment:
+            - DATABASE_URL="postgresql://postgres:postgres@localhost:5432/mydb?schema=public"
+        depends_on:
+            - db
     db:
         container_name: db
         image: postgres:16
